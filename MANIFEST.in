@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include erpbee_bangla_report *.css
+recursive-include erpbee_bangla_report *.csv
+recursive-include erpbee_bangla_report *.html
+recursive-include erpbee_bangla_report *.ico
+recursive-include erpbee_bangla_report *.js
+recursive-include erpbee_bangla_report *.json
+recursive-include erpbee_bangla_report *.md
+recursive-include erpbee_bangla_report *.png
+recursive-include erpbee_bangla_report *.py
+recursive-include erpbee_bangla_report *.svg
+recursive-include erpbee_bangla_report *.txt
+recursive-exclude erpbee_bangla_report *.pyc

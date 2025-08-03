@@ -1,0 +1,36 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2025-08-02 12:07:51.891762",
+ "disable_prepared_report": 1,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "Test",
+ "modified": "2025-08-02 12:07:51.891762",
+ "modified_by": "Administrator",
+ "module": "Erpbee Bangla Report",
+ "name": "Salary Sheet Bangla",
+ "owner": "Administrator",
+ "prepared_report": 1,
+ "ref_doctype": "Salary Slip",
+ "report_name": "Salary Sheet Bangla",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "HR User"
+  },
+  {
+   "role": "HR Manager"
+  },
+  {
+   "role": "Employee"
+  },
+  {
+   "role": "Employee Self Service"
+  }
+ ]
+}

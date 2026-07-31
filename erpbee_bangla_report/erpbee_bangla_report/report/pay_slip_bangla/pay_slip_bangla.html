@@ -50,30 +50,30 @@
 			}
 	
 	</style>
-<div style="height: 2cm;"></div>
+<div style="height: 1.5cm;"></div>
 
 <table class="table table-bordered" style=" width: 100%;height: 100%;margin: 0;padding: 0;">
 	<tbody>
 		<tr style="border-bottom: none;">
-			<th colspan="8" style="text-align: center;font-weight: bold;font-size: 24px;">{{data[j].company_bangla}}</th>
+			<th colspan="8" style="text-align: center;font-weight: bold;font-size: 24px;">{{data[j].company}}</th>
 		</tr>
 		<tr style="border-bottom: none;">
 			<th colspan="8" style="text-align: center;font-weight: bold;font-size: 23px;">{%= filters.month %}, {%= filters.year %}- মাসের জন্য পে-স্লিপ</th>
 		</tr>
-		<tr style="border-bottom: none;margin: 0; padding: 0;font-size: 19px;">
-			<th colspan="1" style="border: none;text-align: center;">কর্মচারী নম্বর: {{data[j].employee}}</th>
+		<tr style="border-bottom: none;margin: 0; padding: 0;font-size: 17px;">
+			<th colspan="1" style="border: none;text-align: center;">আইডি নং: {{data[j].employee}}</th>
 			<th colspan="5" style="border: none;text-align: center;">নাম: {{data[j].employee_name}}</th>
 			<th colspan="2" style="border: none;text-align: center;">যোগদানের তারিখ: {{data[j].date_of_joining}}</th>
 		</tr>
-		<tr style="border-bottom: none;margin: 0; padding: 0; font-size: 21px;">
+		<tr style="border-bottom: none;margin: 0; padding: 0; font-size: 17px;">
 			<th colspan="4" style="border: none;text-align: center;">পদবী: {{data[j].designation}}</th>
 			<th colspan="4" style="border: none;text-align: center;">বিভাগ: {{data[j].department}}</th>
 		</tr>
 		<tr>
 			<th style="text-align: center;">বেতন বিবরণী</th>
 			<th style="text-align: center;" colspan="3">উপস্থিতি</th>
-			<th style="text-align: center;" colspan="2">ও.টি. এবং ভাতা</th>
-			<th style="text-align: center;" colspan="2">সমন্বয়</th>
+			<th style="text-align: center;" colspan="2">ওভারটাইম এবং ভাতা</th>
+			<th style="text-align: center;" colspan="2">সমন্বয় বিবরণী</th>
 		</tr>
 	
 		<tr>
@@ -82,15 +82,15 @@
 			<td colspan="2">অনুপস্থিত: {{data[j].a}}</td>
 			<td>ও.টি. হার: {{data[j].ot_rate}}</td>
 			<td>ও.টি. ঘন্টা: {{data[j].ot_hr}} </td>
-			<td colspan="2">ভবিষ্যনিধি তহবিল: {{data[j].pf ||0}} </td>    
+			<td colspan="2">ভবিষ্যত তহবিল: {{data[j].pf ||0}} </td>    
 		</tr>
 	
 	
 		<tr>
 			<td>মূল বেতন: {{data[j].basic}}  </td>
-			<td>নৈ. ছুটি: {{data[j].cl}}</td>
-			<td>উপা.ছুটি: {{data[j].el}}</td>
-			<td>মা.ছুটি: {{data[j].ml}}</td>
+			<td>নৈমিত্তিক ছুটি: {{data[j].cl}}</td>
+			<td>অর্জিত ছুটি: {{data[j].el}}</td>
+			<td>মাতৃ. ছুটি: {{data[j].ml}}</td>
 			<td>ও.টি. পরিমাণ:{{data[j].ot_amt}}</td>
 			<td>বকেয়া: {{data[j].arrear}}</td>  
 			<!-- <td>Others 0</td> -->
@@ -98,8 +98,8 @@
 		</tr>
 		
 		<tr>
-			<td>অন্যান্য: {{data[j].allowance}} </td>
-			<td>অ.ছুটি: {{data[j].sl}}</td>
+			<td>বাড়ি ভাড়া: {{data[j].hrent}} </td>
+			<td>পীড়াছুটি: {{data[j].sl}}</td>
 			<td colspan="2">বিলম্ব: {{data[j].late_days}} </td>
 			<td>রাতের দিন: {{data[j].night_days}} </td>
 			<td>রাত্রি ভাতা: {{data[j].night_amt}}</td>  
@@ -108,9 +108,9 @@
 		</tr>
 		
 		<tr>
-			<td>&nbsp;</td>
-			<td>ছুটি: {{data[j].w_h}}</td>
-			<td colspan="2"> বে.হীন ছুটি: {{data[j].ll_lwp}}</td>
+			<td>চিকিৎসা ভাতা: {{data[j].medical}} </td>
+			<td>সাপ্তাহিক ছুটি: {{data[j].w_h}}</td>
+			<td colspan="2"> বেতনহীন ছুটি: {{data[j].ll_lwp}}</td>
 			<td>দুপুরের ভাতা: {{data[j].lunch}}</td>
 			<td>ভ্রমণ ভাতা: {{data[j].travel}}</td>
 			<td colspan="2">স্ট্যাম্প: {{data[j].stamp ||0}} </td>   
@@ -119,14 +119,14 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td colspan="3">অনুপস্থিতি কর্তন: {{data[j].absent_penalty}}</td>
-			<td colspan="2">উপস্থিতি বোনাস: {{data[j].attn_bon}}</td> 
-			<td colspan="2">বিলম্বিত অর্থ: {{data[j].late_ded || 0}}</td>   
+			<td colspan="2">হাজিরা বোনাস: {{data[j].attn_bon}}</td> 
+			<td colspan="2">বিলম্বিত কর্তন: {{data[j].late_ded || 0}}</td>   
 		</tr>
 		
 		<tr>
 			<td colspan="4">&nbsp;</td>
 			<td colspan="2">মোট প্রদেয়: {{data[j].gross_payable}}</td>
-			<td colspan="2">মোট পরিশোধযোগ্য:{{data[j].net_pay}} </td>   
+			<td colspan="2">নিট প্রদেয়:{{data[j].net_pay}} </td>   
 		</tr>
 		<!-- <tr>
 			<td>&nbsp;</td>

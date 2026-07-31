@@ -6,6 +6,17 @@ from frappe import _
 from frappe.utils import add_days, cstr, date_diff, get_first_day, get_last_day, getdate
 
 def to_bangla_number(number):
+    if number is None:
+        return ""
+    
+    # If it's a float/decimal that equals a whole number (e.g., 50.0 or "50.0"), cast to int
+    try:
+        num_float = float(number)
+        if num_float.is_integer():
+            number = int(num_float)
+    except (ValueError, TypeError):
+        pass
+
     en_to_bn = str.maketrans('0123456789', '০১২৩৪৫৬৭৮৯')
     return str(number).translate(en_to_bn)
 
@@ -49,14 +60,17 @@ def execute(filters= None):
 
 
 	for ss in salary_slips:
-		allowance = 0
+		allowance=0
+		hr_allowance = 0
+		med_allowance = 0
 		acctual_basic,salary_slip_basic = get_basic(ss.name)
 		if acctual_basic is None:
 			acctual_basic = 0
 		# salary_slip_basic = get_salary_basic(ss.name)
 		if salary_slip_basic is None:
 			salary_slip_basic = 0
-		allowance = get_allowance(ss.name)
+		hr_allowance = get_hrent_allowance(ss.name)
+		med_allowance= get_med_allowance(ss.name)
 		acctual_lunch=get_lunch_tr_allowance(ss.name)+get_lunch(ss.name)+get_convanse(ss.name)
 		if acctual_lunch is None:
 			acctual_lunch=0
@@ -97,14 +111,15 @@ def execute(filters= None):
 		row = [
 			#ss.name,
 			ss.employee,
-			ss.name_in_bangla,
+			ss.employee_name,
 			#doj_map.get(ss.employee),
 			to_bangla_number(ss.date_of_joining),
-			ss.department_in_bangla,
-			ss.designation_in_bangla,
+			ss.department,
+			ss.designation,
 
 			to_bangla_number(round(acctual_basic,0)),
-			to_bangla_number(allowance),
+			to_bangla_number(hr_allowance),
+			to_bangla_number(med_allowance),
 			to_bangla_number(round(acctual_basic + allowance,0)),
 			to_bangla_number(ss.present_days),
 			to_bangla_number(off_days(ss.employee, ss.start_date, ss.end_date)),
@@ -146,7 +161,7 @@ def execute(filters= None):
 		  to_bangla_number((round(ss.total_deduction,0)+round(ss.total_loan_repayment,0))),
 		to_bangla_number(round((ss.net_pay-float(ss.total_overtime_pay)-float(acctual_lunch)-float(holiday_allowance)+float(acctual_lunch)+float(ot_amount)),0)), 
 		None,
-		ss.company_in_bangla]
+		ss.company]
 		
 
 		data.append(row)
@@ -168,7 +183,8 @@ def get_columns(salary_slips):
 		# _("Start Date") + "::80",
 		# _("End Date") + "::80",
 		_("Basic") + "::10",
-		_("Allowance") + "::10",
+		_("Hrent") + "::10",
+		_("Medical") + "::10",
 		_("Gross") + "::10",
 		_("P") + ":Integer:5",
 		_("W H") + ":Integer:5",
@@ -222,7 +238,7 @@ def get_columns(salary_slips):
 			_("Total Deduction") + ":Currency:20",
 			_("Net Pay") + ":Currency:20",
 			_("Signature & Stamp") + ":Text:10",
-			_("Company Bangla") + ":Text:10",
+			_("Company") + ":Text:10",
 
 		]
 		
@@ -323,6 +339,13 @@ def get_basic(ss):
 
 # def get_salary_basic(ss):
 	# return frappe.db.get_value('Salary Detail', {'parent': ss, 'abbr': 'B'}, 'amount')
+def get_hrent_allowance(ss):	
+	return (frappe.db.get_value('Salary Detail', {'parent': ss, 'abbr': 'HR'}, 'amount') or 0)
+
+def get_med_allowance(ss):
+	#return frappe.db.get_value('Salary Detail', {'parent': ss, 'abbr': 'HR'}, 'SUM(amount)')
+	# return frappe.db.sql("""SELECT SUM(amount) FROM `tabSalary Detail` where parent=%s and abbr IN('M', 'HR')""", ss)[0][0]
+	return (frappe.db.get_value('Salary Detail', {'parent': ss, 'abbr': 'M'}, 'amount') or 0)
 
 def get_allowance(ss):
 	#return frappe.db.get_value('Salary Detail', {'parent': ss, 'abbr': 'HR'}, 'SUM(amount)')

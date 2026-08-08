@@ -120,7 +120,7 @@ def execute(filters= None):
 			to_bangla_number(round(acctual_basic,0)),
 			to_bangla_number(hr_allowance),
 			to_bangla_number(med_allowance),
-			to_bangla_number(round(acctual_basic + allowance,0)),
+			to_bangla_number(round(acctual_basic + hr_allowance+med_allowance,0)),
 			to_bangla_number(ss.present_days),
 			to_bangla_number(off_days(ss.employee, ss.start_date, ss.end_date)),
 			to_bangla_number(CL),

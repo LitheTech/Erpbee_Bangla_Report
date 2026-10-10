@@ -66,7 +66,8 @@ def execute(filters= None):
 		acctual_basic,salary_slip_basic = get_basic(ss.name)
 		if acctual_basic is None:
 			acctual_basic = 0
-		# salary_slip_basic = get_salary_basic(ss.name)
+		if ss.total_working_days != ss.payment_days + ss.absent_days + ss.leave_without_pay:
+			acctual_basic = (acctual_basic / ss.total_working_days) * (ss.payment_days + ss.absent_days + ss.leave_without_pay)# salary_slip_basic = get_salary_basic(ss.name)
 		if salary_slip_basic is None:
 			salary_slip_basic = 0
 		hr_allowance = get_hrent_allowance(ss.name)
@@ -133,7 +134,7 @@ def execute(filters= None):
 			to_bangla_number(ss.absent_days),
 			to_bangla_number(ss.late_days),
 			# ss.gross_pay,
-			to_bangla_number(round(float((salary_slip_basic+allowance) or 0),2)),
+			# to_bangla_number(round(float((salary_slip_basic+allowance) or 0),2)),
 			to_bangla_number(round(float(overtime_hours or 0),1)),
 			to_bangla_number(round(float(ss.overtime_rate),2)),
 			to_bangla_number(round(float(ot_amount or 0),0)),
@@ -195,7 +196,7 @@ def get_columns(salary_slips):
 		_("LL LWP") + ":Integer:5",
 		_("A") + ":Integer:5",
 		_("Late Days") + ":Integer:5",
-		_("Total Salary") + ":Currency:10",
+		# _("Total Salary") + ":Currency:10",
 		_("OT HR") + ":%.2Float:7",
 		_("OT Rate") + ":%.2Float:7",
 		_("OT Amt") + ":Currency:10",
